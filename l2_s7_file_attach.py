@@ -8,8 +8,9 @@ link = "http://suninjuly.github.io/file_input.html"
 try:
     browser = webdriver.Chrome()
     browser.get(link)  
-    # changes to work with submodule
-        # changes to work with submodule
+    # changes to work with submodule 1
+        # changes to work with submodule 2
+        # changes to work with submodule 3
 
     browser.find_element(By.CSS_SELECTOR,'input[name="firstname"]').send_keys("Petros")
     browser.find_element(By.CSS_SELECTOR,'input[name="lastname"]').send_keys("Petrosyan")
