@@ -9,6 +9,7 @@ try:
     browser = webdriver.Chrome()
     browser.get(link)  
     # changes to work with submodule
+        # changes to work with submodule
 
     browser.find_element(By.CSS_SELECTOR,'input[name="firstname"]').send_keys("Petros")
     browser.find_element(By.CSS_SELECTOR,'input[name="lastname"]').send_keys("Petrosyan")
