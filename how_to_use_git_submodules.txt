@@ -1,0 +1,92 @@
+
+https://git-scm.com/book/ru/v2/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B-Git-%D0%9F%D0%BE%D0%B4%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D0%B8
+
+
+1 cd /c/Users/sahka/git_repos
+git clone https://github.com/sah-karen/app_chip_sim.git
+
+2 
+cd /c/Users/sahka/git_repos
+git clone https://github.com/sah-karen/ger-prj.git
+cd /c/Users/sahka/git_repos/ger-prj
+
+2a
+$git submodule add https://github.com/sah-karen/app_chip_sim
+ Cloning into 'C:/Users/sahka/git_repos/ger-prj/app_chip_sim'...
+ remote: Enumerating objects: 6, done.
+ remote: Counting objects: 100% (6/6), done.
+ remote: Compressing objects: 100% (4/4), done.
+ remote: Total 6 (delta 0), reused 3 (delta 0), pack-reused 0
+ Receiving objects: 100% (6/6), done.
+ warning: LF will be replaced by CRLF in .gitmodules.
+ The file will have its original line endings in your working directory
+
+ 
+ git commit -am "Added module chip_sim"
+  [main 2b5404b] Added module ship_sim:
+   2 files changed, 4 insertions(+)
+   create mode 100644 .gitmodules
+   create mode 160000 app_chip_sim
+
+ 
+ git push
+ cd ..
+ rm rf ger-prj/
+ 
+3 Clone repo with module 
+  git clone https://github.com/sah-karen/ger-prj.git 
+    !!! folder app_chip_sim exist but it empty
+ $git submodule init для инициализации локального конфигурационного файла, и 
+ $git submodule update  для получения всех данных этого проекта 
+or 
+ $git submodule update --init.
+ 
+
+ Если вы передадите опцию --recurse-submodules команде git clone, то она автоматически инициализирует и обновит каждый подмодуль в этом репозитории,	
+
+4 --- Update changes in submodule into MainProject
+ 4a added new file  "l2_s7_file_attach.py" to repo app_chip_sim 
+    
+ 4b 
+   $git submodule update --remote  Git сам перейдёт в ваши подмодули, получит изменения и обновит их для вас.
+ 
+  -----------------
+  ~/git_repos/ger-prj (main)
+  $ git diff   shows that main project changed
+   diff --git a/app_chip_sim b/app_chip_sim
+   index 9737a8b..a5289c2 160000
+   --- a/app_chip_sim
+   +++ b/app_chip_sim
+   ------------------
+   $ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   app_chip_sim (new commits)
+no changes added to commit (use "git add" and/or "git commit -a")
+   git commit -am "commit changes"
+   # this does not add changes getted by "4b" coomand to MainProject submodule. It is neccessary to use "--merge" see item 5
+   git push        
+
+5 --- Update changes in submodule into MainProject with merge changes into MainProject's submodule folder in git
+eg. making changes in git submodule project -   added "#changes to work with submodule" in app_chip_sim/l2_s7_file_attach.py file 
+   in main project git add "--merge" parameter to update
+$git submodule update --remote  --merge
+$git commit -am "commit changes"
+# the "#changes to work with submodule" will be appeared in the file of MainProject's submodule 
+$git push           
+
+----------------- 6 to delete submodulee
+$ git rm -r app_chip_sim/
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   .gitmodules
+        deleted:    app_chip_sim
+$ git commit -m "delete submodule app_chip_sim"
+$ git push
