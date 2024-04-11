@@ -2,10 +2,10 @@
 https://git-scm.com/book/ru/v2/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B-Git-%D0%9F%D0%BE%D0%B4%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D0%B8
 
 
-1 cd /c/Users/sahka/git_repos
+----------------- 1 cd /c/Users/sahka/git_repos
 git clone https://github.com/sah-karen/app_chip_sim.git
 
-2 
+----------------- 2 
 cd /c/Users/sahka/git_repos
 git clone https://github.com/sah-karen/ger-prj.git
 cd /c/Users/sahka/git_repos/ger-prj
@@ -33,7 +33,7 @@ $git submodule add https://github.com/sah-karen/app_chip_sim
  cd ..
  rm rf ger-prj/
  
-3 Clone repo with module 
+----------------- 3 Clone repo with module 
   git clone https://github.com/sah-karen/ger-prj.git 
     !!! folder app_chip_sim exist but it empty
  $git submodule init для инициализации локального конфигурационного файла, и 
@@ -44,7 +44,7 @@ or
 
  Если вы передадите опцию --recurse-submodules команде git clone, то она автоматически инициализирует и обновит каждый подмодуль в этом репозитории,	
 
-4 --- Update changes in submodule into MainProject
+----------------- 4 --- Update changes in submodule into MainProject
  4a added new file  "l2_s7_file_attach.py" to repo app_chip_sim 
     
  4b 
@@ -70,7 +70,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
    # this does not add changes getted by "4b" coomand to MainProject submodule. It is neccessary to use "--merge" see item 5
    git push        
 
-5 --- Update changes in submodule into MainProject with merge changes into MainProject's submodule folder in git
+----------------- 5 --- Update changes in submodule into MainProject with merge changes into MainProject's submodule folder in git
 eg. making changes in git submodule project -   added "#changes to work with submodule" in app_chip_sim/l2_s7_file_attach.py file 
    in main project git add "--merge" parameter to update
 $git submodule update --remote  --merge
@@ -90,3 +90,14 @@ Changes to be committed:
         deleted:    app_chip_sim
 $ git commit -m "delete submodule app_chip_sim"
 $ git push
+
+-------------------  7 working with submodule from Main project
+7a goto submodule folder
+add/change file
+$ git add file
+  git commmit -am "some comment"
+  git push                    ---- changes will go to submodule git repo
+
+7b   goto main folder
+  git commit -am "some comment for Main project"
+  git push                    ---- changes will go to Main project git repo
